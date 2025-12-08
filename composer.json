@@ -1,6 +1,6 @@
 {
     "name": "papimod/date",
-    "version": "1.0.0",
+    "description": "Module Papi",
     "type": "library",
     "license": "Apache-2.0",
     "autoload": {
@@ -20,8 +20,8 @@
         "test": "./vendor/bin/phpunit"
     },
     "require": {
-        "php": ">=8.5.0",
-        "papi/papi": "^1.0"
+        "php": ">=8.3.0",
+        "papi/papi": "^1.1"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^4.0",

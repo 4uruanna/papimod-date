@@ -2,28 +2,34 @@
 
 namespace Papimod\Date\Test;
 
-use Papi\AppBuilder;
+use Papi\ApiBuilder;
+use Papi\enumerator\HttpMethods;
+use Papi\Test\ApiBaseTestCase;
 use Papimod\Date\DateModule;
-use Papimod\Dotenv\DotenvModule;
+use Papimod\Dotenv\DotEnvModule;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Small;
-use PHPUnit\Framework\TestCase;
 
 #[CoversClass(DateModule::class)]
 #[Small]
-final class DateModuleTest extends TestCase
+final class DateModuleTest extends ApiBaseTestCase
 {
     public function testLoadModule(): void
     {
-        define("API_ENV_DIRECTORY", __DIR__);
+        define("ENVIRONMENT_DIRECTORY", __DIR__);
+        define("ENVIRONMENT_FILE", ".test.env");
 
-        new AppBuilder()
+        $request = $this->createRequest(HttpMethods::GET, "/fake");
+        $response = ApiBuilder::getInstance()
             ->setModules([
-                DotenvModule::class,
+                DotEnvModule::class,
                 DateModule::class
             ])
-            ->build();
+            ->setActions([FakeAction::class])
+            ->build()
+            ->handle($request);
 
         $this->assertEquals(date_default_timezone_get(), DATE_TIMEZONE);
+        $this->assertEquals("2025-12-05 12:00:00", (string) $response->getBody());
     }
 }
