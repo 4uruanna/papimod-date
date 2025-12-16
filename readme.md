@@ -32,3 +32,7 @@ Also provide a `DateService` class to convert dates.
 |Type           | string                                            |
 |Description    | Global API timezone                               |
 |Default        | `Europe/Paris`                                    |
+
+## API
+
+- [(class) DateService](./source/DateService.php)
