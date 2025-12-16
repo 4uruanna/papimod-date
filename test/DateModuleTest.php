@@ -14,11 +14,27 @@ use PHPUnit\Framework\Attributes\Small;
 #[Small]
 final class DateModuleTest extends ApiBaseTestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+        defined("ENVIRONMENT_DIRECTORY") || define("ENVIRONMENT_DIRECTORY", __DIR__);
+        defined("ENVIRONMENT_FILE") || define("ENVIRONMENT_FILE", ".test.env");
+    }
+
     public function testLoadModule(): void
     {
-        define("ENVIRONMENT_DIRECTORY", __DIR__);
-        define("ENVIRONMENT_FILE", ".test.env");
+        ApiBuilder::getInstance()
+            ->setModules([
+                DotEnvModule::class,
+                DateModule::class
+            ])
+            ->build();
 
+        $this->assertEquals(date_default_timezone_get(), DATE_TIMEZONE);
+    }
+
+    public function testLoadModuleDefinitions(): void
+    {
         $request = $this->createRequest(HttpMethods::GET, "/fake");
         $response = ApiBuilder::getInstance()
             ->setModules([
@@ -29,7 +45,6 @@ final class DateModuleTest extends ApiBaseTestCase
             ->build()
             ->handle($request);
 
-        $this->assertEquals(date_default_timezone_get(), DATE_TIMEZONE);
         $this->assertEquals("2025-12-05 12:00:00", (string) $response->getBody());
     }
 }
