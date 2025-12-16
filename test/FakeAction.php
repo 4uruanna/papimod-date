@@ -37,8 +37,8 @@ class FakeAction implements Action
      */
     public function __invoke(Request $request, Response $response): Response
     {
-        $date = $this->dateService->dateFromString("2025-12-05 12:00:00");
-        $body = $this->dateService->dateToString($date);
+        $date = $this->dateService->fromString("2025-12-05 12:00:00");
+        $body = $this->dateService->toString($date);
         $response->getBody()->write($body);
         return $response;
     }

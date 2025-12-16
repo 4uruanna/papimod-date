@@ -5,6 +5,7 @@ namespace Papimod\Date\Test;
 use DateTime;
 use Papimod\Date\DateService;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
 
@@ -22,14 +23,15 @@ final class DateServiceTest extends TestCase
     public function testToString(): void
     {
         $date = new DateTime('2025-12-05');
-        $string = $this->service->dateToString($date);
+        $string = $this->service->toString($date);
         $this->assertTrue(str_starts_with($string, '2025-12-05'));
     }
 
+    #[Depends('testToString')]
     public function testFromString(): void
     {
-        $date = $this->service->dateFromString('2025-12-05 02:03:04');
-        $string = $this->service->dateToString($date);
+        $date = $this->service->fromString('2025-12-05 02:03:04');
+        $string = $this->service->toString($date);
         $this->assertEquals('2025-12-05 02:03:04', $string);
     }
 }

@@ -6,12 +6,18 @@ use DateTime;
 
 final class DateService
 {
-    public function dateToString(DateTime $date): string
+    /**
+     * Converts text to date using the globally configured format
+     */
+    public function toString(DateTime $date): string
     {
         return $date->format(DATE_FORMAT);
     }
 
-    public function dateFromString(string $date): DateTime|false
+    /**
+     * Converts text to date using the globally configured format
+     */
+    public function fromString(string $date): DateTime|false
     {
         return DateTime::createFromFormat(DATE_FORMAT, $date);
     }
