@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4d1d8e37aeb9cb017965fc8443b57933",
+    "content-hash": "869e723d254e10a96bb4e6410c36ff05",
     "packages": [
         {
             "name": "fig/http-message-util",
@@ -237,16 +237,16 @@
         },
         {
             "name": "papi/papi",
-            "version": "v1.1.1",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/4uruanna/papi.git",
-                "reference": "1e34136ab512de8684c6753f2136b97eb009e67b"
+                "reference": "bd9ad534fc23f0609fc2fa3f175905b9fdb076e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/4uruanna/papi/zipball/1e34136ab512de8684c6753f2136b97eb009e67b",
-                "reference": "1e34136ab512de8684c6753f2136b97eb009e67b",
+                "url": "https://api.github.com/repos/4uruanna/papi/zipball/bd9ad534fc23f0609fc2fa3f175905b9fdb076e5",
+                "reference": "bd9ad534fc23f0609fc2fa3f175905b9fdb076e5",
                 "shasum": ""
             },
             "require": {
@@ -279,26 +279,26 @@
             "description": "Slim Framework Builder",
             "support": {
                 "issues": "https://github.com/4uruanna/papi/issues",
-                "source": "https://github.com/4uruanna/papi/tree/v1.1.1"
+                "source": "https://github.com/4uruanna/papi/tree/v2.0.0"
             },
-            "time": "2025-12-09T18:33:31+00:00"
+            "time": "2025-12-17T14:33:58+00:00"
         },
         {
             "name": "papimod/dotenv",
-            "version": "v1.1.0",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/4uruanna/papimod-dotenv.git",
-                "reference": "2a70c23a1a111e6cb0b94fbf2115f4007835b47e"
+                "reference": "7f2edd1e0aa2c18f7df691147ff26e21fcda69d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/4uruanna/papimod-dotenv/zipball/2a70c23a1a111e6cb0b94fbf2115f4007835b47e",
-                "reference": "2a70c23a1a111e6cb0b94fbf2115f4007835b47e",
+                "url": "https://api.github.com/repos/4uruanna/papimod-dotenv/zipball/7f2edd1e0aa2c18f7df691147ff26e21fcda69d9",
+                "reference": "7f2edd1e0aa2c18f7df691147ff26e21fcda69d9",
                 "shasum": ""
             },
             "require": {
-                "papi/papi": "^1.1.0",
+                "papi/papi": "^2.0.0",
                 "php": ">=8.3.0",
                 "vlucas/phpdotenv": "^5.6.2"
             },
@@ -326,9 +326,9 @@
             "description": "Module Papi",
             "support": {
                 "issues": "https://github.com/4uruanna/papimod-dotenv/issues",
-                "source": "https://github.com/4uruanna/papimod-dotenv/tree/v1.1.0"
+                "source": "https://github.com/4uruanna/papimod-dotenv/tree/v2.0.0"
             },
-            "time": "2025-12-08T15:27:55+00:00"
+            "time": "2025-12-17T16:43:46+00:00"
         },
         {
             "name": "php-di/invoker",
@@ -2048,16 +2048,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "12.5.2",
+            "version": "12.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "06713c2633d6d832f2fe98a70511ecaa7cb92c1a"
+                "reference": "4ba0e923f9d3fc655de22f9547c01d15a41fc93a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/06713c2633d6d832f2fe98a70511ecaa7cb92c1a",
-                "reference": "06713c2633d6d832f2fe98a70511ecaa7cb92c1a",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4ba0e923f9d3fc655de22f9547c01d15a41fc93a",
+                "reference": "4ba0e923f9d3fc655de22f9547c01d15a41fc93a",
                 "shasum": ""
             },
             "require": {
@@ -2125,7 +2125,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.5.2"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.5.4"
             },
             "funding": [
                 {
@@ -2149,7 +2149,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-08T07:22:32+00:00"
+            "time": "2025-12-15T06:05:34+00:00"
         },
         {
             "name": "sebastian/cli-parser",
