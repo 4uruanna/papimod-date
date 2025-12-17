@@ -2,79 +2,38 @@
 
 namespace Papimod\Date;
 
-use Papi\ApiModule;
+use Papi\PapiModule;
 use Papimod\Dotenv\DotEnvModule;
 
 use function DI\create;
 
-class DateModule extends ApiModule
+class DateModule extends PapiModule
 {
-    public static function getDefaultDateFormat(): string
+    public static function getPrerequisites(): array
     {
-        return "Y-m-d H:i:s";
+        return [DotEnvModule::class];
     }
 
-    public static function getDefaultDateTimezone(): string
+    public static function getDefinitions(): array
     {
-        return "Europe/Paris";
-    }
-
-    protected string $path = __DIR__;
-
-    public ?array $prerequisite_list = [
-        DotEnvModule::class
-    ];
-
-    public function __construct()
-    {
-        $this->definition_list = [
-            DateService::class => create()->constructor()
-        ];
+        return [DateService::class => create()->constructor()];
     }
 
     /**
      * Configure the module
      */
-    public function configure(): void
-    {
-        $this->defineDateFormat();
-        $this->defineDateTimezone();
-        date_default_timezone_set(DATE_TIMEZONE);
-    }
-
-    /**
-     * Define the date format
-     */
-    public function defineDateFormat(): void
+    public static function configure(): void
     {
         if (defined("DATE_FORMAT") === false) {
-            $format = self::getDefaultDateFormat();
-
-            if (isset($_SERVER['DATE_FORMAT'])) {
-                $format = $_SERVER['DATE_FORMAT'];
-            }
-
+            $format = $_ENV["DATE_FORMAT"] ?? "Y-m-d H:i:s";
             define("DATE_FORMAT", $format);
         }
 
-        $_SERVER['DATE_FORMAT'] = DATE_FORMAT;
-    }
-
-    /**
-     * Define the date timezone
-     */
-    public function defineDateTimezone(): void
-    {
         if (defined("DATE_TIMEZONE") === false) {
-            $timezone = self::getDefaultDateTimezone();
-
-            if (isset($_SERVER['DATE_TIMEZONE'])) {
-                $timezone = $_SERVER['DATE_TIMEZONE'];
-            }
-
+            $timezone = $_ENV["DATE_TIMEZONE"] ?? "Europe/Paris";
             define("DATE_TIMEZONE", $timezone);
         }
 
-        $_SERVER['DATE_TIMEZONE'] = DATE_TIMEZONE;
+        date_default_timezone_set(DATE_TIMEZONE);
     }
 }

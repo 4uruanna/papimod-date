@@ -2,32 +2,32 @@
 
 namespace Papimod\Date\Test;
 
-use Papi\ApiBuilder;
-use Papi\enumerator\HttpMethods;
-use Papi\Test\ApiBaseTestCase;
+use Papi\enumerator\HttpMethod;
+use Papi\PapiBuilder;
+use Papi\Test\mock\FooGet;
+use Papi\Test\PapiTestCase;
 use Papimod\Date\DateModule;
 use Papimod\Dotenv\DotEnvModule;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Small;
 
 #[CoversClass(DateModule::class)]
-#[Small]
-final class DateModuleTest extends ApiBaseTestCase
+final class DateModuleTest extends PapiTestCase
 {
+    private PapiBuilder $builder;
+
     public function setUp(): void
     {
         parent::setUp();
-        defined("ENVIRONMENT_DIRECTORY") || define("ENVIRONMENT_DIRECTORY", __DIR__);
-        defined("ENVIRONMENT_FILE") || define("ENVIRONMENT_FILE", ".test.env");
+        defined("PAPI_DOTENV_DIRECTORY") || define("PAPI_DOTENV_DIRECTORY", __DIR__);
+        defined("PAPI_DOTENV_FILE") || define("PAPI_DOTENV_FILE", ".test.env");
+        $this->builder = new PapiBuilder();
+        $this->builder->addModules(DotEnvModule::class);
     }
 
     public function testLoadModule(): void
     {
-        ApiBuilder::getInstance()
-            ->setModules([
-                DotEnvModule::class,
-                DateModule::class
-            ])
+        $this->builder
+            ->addModules(DateModule::class)
             ->build();
 
         $this->assertEquals(date_default_timezone_get(), DATE_TIMEZONE);
@@ -35,16 +35,13 @@ final class DateModuleTest extends ApiBaseTestCase
 
     public function testLoadModuleDefinitions(): void
     {
-        $request = $this->createRequest(HttpMethods::GET, "/fake");
-        $response = ApiBuilder::getInstance()
-            ->setModules([
-                DotEnvModule::class,
-                DateModule::class
-            ])
-            ->setActions([FakeAction::class])
+        $request = $this->createRequest(HttpMethod::GET, "/");
+
+        $response = $this->builder
+            ->addAction(FooGet::class)
             ->build()
             ->handle($request);
 
-        $this->assertEquals("2025-12-05 12:00:00", (string) $response->getBody());
+        $this->assertEquals("foo", (string) $response->getBody());
     }
 }
