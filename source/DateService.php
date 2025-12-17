@@ -8,7 +8,7 @@ final class DateService
 {
     /**
      * Converts text to date using the globally configured format
-     * 
+     *
      * @param DateTime $date
      */
     public function format(DateTime $date): string
@@ -18,7 +18,7 @@ final class DateService
 
     /**
      * Parse a date using the globally configured format
-     * 
+     *
      * @param string $date
      */
     public function parse(string $date): DateTime|false
