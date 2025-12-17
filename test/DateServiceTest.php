@@ -5,7 +5,6 @@ namespace Papimod\Date\Test;
 use DateTime;
 use Papimod\Date\DateService;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
 
@@ -20,18 +19,35 @@ final class DateServiceTest extends TestCase
         $this->service = new DateService();
     }
 
-    public function testToString(): void
+    public function testFormat(): void
     {
-        $date = new DateTime('2025-12-05');
-        $string = $this->service->toString($date);
-        $this->assertTrue(str_starts_with($string, '2025-12-05'));
+        $x = '2025-12-05 02:03:04';
+        $date = new DateTime($x);
+        $string_date = $this->service->format($date);
+        $this->assertEquals($x, $string_date);
     }
 
-    #[Depends('testToString')]
-    public function testFromString(): void
+    public function testParse(): void
     {
-        $date = $this->service->fromString('2025-12-05 02:03:04');
-        $string = $this->service->toString($date);
-        $this->assertEquals('2025-12-05 02:03:04', $string);
+        $date = '2025-12-05 02:03:04';
+        $a = new DateTime($date);
+        $b = $this->service->parse($date);
+        $diff = $a->getTimestamp() - $b->getTimestamp();
+        $this->assertEquals(0, $diff);
+    }
+
+    public function testValidate(): void
+    {
+        $date = '2025-12-05 02:03:04';
+        $valid = $this->service->validate($date);
+        $this->assertTrue($valid);
+
+        $date = '2025-12-05 02:03:04:05';
+        $valid = $this->service->validate($date);
+        $this->assertFalse($valid);
+
+        $date = '0';
+        $valid = $this->service->validate($date);
+        $this->assertFalse($valid);
     }
 }

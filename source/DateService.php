@@ -8,17 +8,31 @@ final class DateService
 {
     /**
      * Converts text to date using the globally configured format
+     * 
+     * @param DateTime $date
      */
-    public function toString(DateTime $date): string
+    public function format(DateTime $date): string
     {
         return $date->format(DATE_FORMAT);
     }
 
     /**
-     * Converts text to date using the globally configured format
+     * Parse a date using the globally configured format
+     * 
+     * @param string $date
      */
-    public function fromString(string $date): DateTime|false
+    public function parse(string $date): DateTime|false
     {
         return DateTime::createFromFormat(DATE_FORMAT, $date);
+    }
+
+    /**
+     * Checks if the given date is valid
+     *
+     * @param string $date
+     */
+    public function validate(string $date): bool
+    {
+        return DateTime::createFromFormat(DATE_FORMAT, $date) !== false;
     }
 }
