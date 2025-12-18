@@ -21,15 +21,12 @@ final class DateModuleTest extends PapiTestCase
         defined("PAPI_DOTENV_DIRECTORY") || define("PAPI_DOTENV_DIRECTORY", __DIR__);
         defined("PAPI_DOTENV_FILE") || define("PAPI_DOTENV_FILE", ".test.env");
         $this->builder = new PapiBuilder();
-        $this->builder->addModules(DotEnvModule::class);
+        $this->builder->addModule(DotEnvModule::class);
     }
 
     public function testLoadModule(): void
     {
-        $this->builder
-            ->addModules(DateModule::class)
-            ->build();
-
+        $this->builder->addModule(DateModule::class)->build();
         $this->assertEquals(date_default_timezone_get(), DATE_TIMEZONE);
     }
 
