@@ -27,7 +27,7 @@ final class DateModuleTest extends PapiTestCase
     public function testLoadModule(): void
     {
         $this->builder->addModule(DateModule::class)->build();
-        $this->assertEquals(date_default_timezone_get(), DATE_TIMEZONE);
+        $this->assertEquals(date_default_timezone_get(), PAPI_DATE_TIMEZONE);
     }
 
     public function testLoadModuleDefinitions(): void
