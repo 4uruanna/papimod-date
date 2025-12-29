@@ -22,7 +22,16 @@ Also provide a `DateService` class to convert dates.
 |Required       | No                                                |
 |Type           | string                                            |
 |Description    | Global date format                                |
-|Default        | `Y-m-d H:i:s`                                     |
+|Default        | `Y-m-d`                                           |
+
+### `DATE_TIME_FORMAT` (.ENV)
+
+|               |                                                   |
+|-:             |:-                                                 |
+|Required       | No                                                |
+|Type           | string                                            |
+|Description    | Global time format                                |
+|Default        | `H:i:s`                                           |
 
 ### `DATE_TIMEZONE` (.ENV)
 
@@ -37,13 +46,13 @@ Also provide a `DateService` class to convert dates.
 
 - [(service) DateService](./source/DateService.php)
 
-
 ## Usage
 
 You can add the following options to your  `.env` file:
 
 ```
-DATE_FORMAT="Y-m-d H:i:s"
+DATE_FORMAT="Y-m-d"
+DATE_TIME_FORMAT="H:i:s"
 DATE_TIMEZONE="Europe/Paris"
 ```
 
@@ -56,9 +65,6 @@ use Papi\PapiBuilder;
 use Papimod\Dotenv\DotEnvModule;
 use Papimod\Date\DateModule;
 use function DI\create;
-
-define("PAPI_DOTENV_DIRECTORY", __DIR__); # Optionnal
-define("PAPI_DOTENV_FILE", ".env"); # Optionnal
 
 $builder = new PapiBuilder();
 
@@ -75,14 +81,11 @@ Use the dedicated service anywhere:
 ```php
 final class MyService
 {
-    private readonly DateService $date_service;
-
-    public function __construct(DateService $date_service)
+    public function __construct(public readonly DateService $date_service) 
     {
-        $this->date_service = $date_service;
     }
 
-    public getUTCNow(): string
+    public getNow(): string
     {
         $now = new DateTime();
         return $this->date_service->format($now);
