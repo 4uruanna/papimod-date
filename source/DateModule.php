@@ -24,16 +24,21 @@ class DateModule extends PapiModule
      */
     public static function configure(): void
     {
-        if (defined("DATE_FORMAT") === false) {
-            $format = $_ENV["DATE_FORMAT"] ?? "Y-m-d H:i:s";
-            define("DATE_FORMAT", $format);
+        if (defined("PAPI_DATE_FORMAT") === false) {
+            $format = $_ENV["DATE_FORMAT"] ?? "Y-m-d";
+            define("PAPI_DATE_FORMAT", $format);
         }
 
-        if (defined("DATE_TIMEZONE") === false) {
+        if (defined("PAPI_TIME_FORMAT") === false) {
+            $format = $_ENV["DATE_TIME_FORMAT"] ?? "H:i:s";
+            define("PAPI_TIME_FORMAT", $format);
+        }
+
+        if (defined("PAPI_DATE_TIMEZONE") === false) {
             $timezone = $_ENV["DATE_TIMEZONE"] ?? "Europe/Paris";
-            define("DATE_TIMEZONE", $timezone);
+            define("PAPI_DATE_TIMEZONE", $timezone);
         }
 
-        date_default_timezone_set(DATE_TIMEZONE);
+        date_default_timezone_set(PAPI_DATE_TIMEZONE);
     }
 }
